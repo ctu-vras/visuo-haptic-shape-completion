@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>supervoxel_clustering</name>
+  <version>1.1.0</version>
+  <description>The supervoxel_clustering package</description>
+
+  <maintainer email="francesco.verdoja@aalto.fi">Francesco Verdoja</maintainer>
+
+  <license>BSD</license>
+
+  <url type="repository">https://github.com/fverdoja/Fast-3D-Pointcloud-Segmentation</url>
+
+  <author email="francesco.verdoja@aalto.fi">Francesco Verdoja</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <build_export_depend>roscpp</build_export_depend>
+  <exec_depend>roscpp</exec_depend>
+
+  <export>
+  </export>
+</package>

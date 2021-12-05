@@ -1,0 +1,47 @@
+function GP=Solve_NoisyGP(X,y,NoiseFn)
+
+%% Configure the standard GP model
+%GP = GP_STD(); 
+GP=GP_NoisyInputs();
+GP.X = X;
+GP.y = y;
+GP.X_noise = X_noise;
+GP.factorisation = 'SVD'; % 'SVD' or 'CHOL' or 'JITCHOL'
+
+%% Mean Functions:
+GP.MeanFn =GP_ConstantMean(mean(y));
+%% Covariance Function
+GP.CovFn = GP_SqExpCov();
+   
+%% Noise Functions:
+%GP.NoiseFn = GP_ClampNoise(GP_MultiNoise([60 30]),[1:2], [5e-1 1e-2]); 
+%GP.NoiseFn = GP_ClampNoise(GP_MultiNoise([60 30]),[1:2], [4e-1 5e-2]); 
+%GP.NoiseFn = GP_ClampNoise(GP_MultiNoise([60]),[1], [7e-2]);
+%GP.NoiseFn = GP_ClampNoise(GP_MultiNoise([60]),[1], [4e-1]);  
+GP.NoiseFn = NoiseFn;  
+%GP.NoiseFn = GP_MultiNoise([60 30]); 
+
+%% Optimisation Parameters
+% Choose optimiser % defaults to fminunc
+GP.solver_function = @fminunc; 
+% Choose Objective function  % defaults to gplmlgrad
+GP.objective_function = @GP_LMLG_FN;
+%GP.objective_function = @GP_CRSVAL_FN; % cross validation
+% Use analytical gradients?
+%GP.optimset('gradobj', 'on');
+%GP.solver_function = @fminunc; 
+% GP.objective_function = @GP_LMLG_FN;
+GP.optimset('gradobj', 'off');
+    
+%% Seed initial hyperparameters with auto-sized vectors
+GP.covpar  = 0.5*ones(1,GP.CovFn.npar(size(X,1)));
+GP.meanpar = zeros(1,GP.MeanFn.npar(size(X,1)));
+GP.noisepar = 1e-3*ones(1,GP.NoiseFn.npar);
+
+%% Learn & Query
+disp('Press any key to begin learning.')
+pause
+
+
+GP.learn();
+GP.solve();

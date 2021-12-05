@@ -1,0 +1,2 @@
+/usr/bin/ar qc libvhacd.a  CMakeFiles/vhacd.dir/src/FloatMath.cpp.o CMakeFiles/vhacd.dir/src/VHACD-ASYNC.cpp.o CMakeFiles/vhacd.dir/src/VHACD.cpp.o CMakeFiles/vhacd.dir/src/btAlignedAllocator.cpp.o CMakeFiles/vhacd.dir/src/btConvexHullComputer.cpp.o CMakeFiles/vhacd.dir/src/vhacdICHull.cpp.o CMakeFiles/vhacd.dir/src/vhacdManifoldMesh.cpp.o CMakeFiles/vhacd.dir/src/vhacdMesh.cpp.o CMakeFiles/vhacd.dir/src/vhacdRaycastMesh.cpp.o CMakeFiles/vhacd.dir/src/vhacdVolume.cpp.o
+/usr/bin/ranlib libvhacd.a

@@ -1,0 +1,69 @@
+<launch>
+  <!-- (start your robot's MoveIt! stack, e.g. include its moveit_planning_execution.launch) -->
+  <!-- (start your tracking system's ROS driver) -->
+
+  <arg name="robot_name" default="kinova"/>
+  <arg name="object_name" default="avocado"/>
+  <arg name="object_origin" default="[0.6, 0, 0.2]"/>
+  <arg name="printed_finger" default="false"/>
+  <arg name="camera_used" default="0"/>
+  <arg name="marker_offset" default="0.17"/>
+
+  <param name="object_name" value="$(arg object_name)"/>
+  <param name="object_origin" value="$(arg object_origin)"/>
+  <param name="printed_finger" value="$(arg printed_finger)"/>
+  <param name="real_setup" value="true"/>
+  <param name="use_sim_time" value="false"/>
+  <param name="camera_used" value="$(arg camera_used)"/>
+
+
+
+  <!-- YOUR ROBOT DRIVER HERE-->
+  <!-- Example of running driver for your robot -->
+  <!--
+    <include file="$(find gen3_robotiq_2f_85_move_it_config)/launch/planning_context.launch">
+      <arg name="printed_finger" value="$(arg printed_finger)"/>
+      <arg name="load_robot_description" value="true"/>
+  </include>
+  <include file="$(find kortex_driver)/launch/kortex_driver.launch">
+    <arg name="ip_address" value="192.168.1.10"/>
+    <arg name="start_rviz" value="true"/>
+    <arg name="robot_name" value="$(arg robot_name)"/>
+    <arg name="printed_finger" value="$(arg printed_finger)"/>
+    <arg name="real_setup" value="true"/>
+  </include>-->
+
+  <!--<include file="$(find kinova_vision)/launch/kinova_vision_rgbd.launch"/>-->
+
+  <!-- YOUR CAMERA DRIVER HERE-->
+  <!-- Example of realsense camera driver -->
+  <!--
+    <include file="$(find realsense2_camera)/launch/rs_multiple_devices.launch">
+     <arg name="serial_no_camera1" value="013222072095"/>
+     <arg name="serial_no_camera2" value="013222072762"/>
+     <arg name="enable_pointcloud" value="true"/>
+     <arg name="initial_reset" value="true"/>
+  </include>-->
+
+  <include file="$(find point_cloud_segmentation)/launch/segmentation.launch">
+      <arg name="segmentation_algorithm" value="region"/>
+      <arg name="pc_topic" value="/camera_point_cloud"/> <!--change this for your camera topic-->
+      <arg name="node_name" value="table_camera_segmentation"/>
+  </include>
+
+
+  <node unless="$(arg printed_finger)" name="finger_tf_broadcaster" pkg="kinova_mujoco" type="finger_tf.py" respawn="true" output="screen"/>
+  <node name="parametrize_cartesian_path_server" pkg="shape_completion" type="parametrize_cartesian_path_service" respawn="true" output="screen"/>
+  <node name="smooth_pcl_server" pkg="shape_completion" type="smooth_pcl_service" respawn="true" output="screen"/>
+  <!--<node name="camera_publisher" pkg="shape_completion" type="camera_publisher.py" respawn="true" output="screen"/>-->
+
+  <node name="camera_0_throttler" pkg="topic_tools" type="throttle" args="messages camera_0/depth/color/points 1.0 camera_0_pc" respawn="true" output="screen"/>
+  <node name="camera_1_throttler" pkg="topic_tools" type="throttle" args="messages camera_1/depth/color/points 1.0 camera_1_pc" respawn="true" output="screen"/>
+  <node name="camera_throttler" pkg="topic_tools" type="throttle" args="messages camera_point_cloud 1.0 camera_pc" respawn="true" output="screen"/>
+  <node name="kinova_camera_throttler" pkg="topic_tools" type="throttle" args="messages camera_kinova/depth_registered/points 1.0 kinova_camera_pc" respawn="true" output="screen"/>
+
+  <node name="reconstruction_shower" pkg="shape_completion" type="rec_mesh_publisher.py" respawn="true" output="screen"/>
+  <node name="arrow_shower" pkg="shape_completion" type="arrows.py" respawn="true" output="screen"/>
+  <node name="new_pc_node" pkg="shape_completion" type="new_pc_vis.py" respawn="true" output="screen"/>
+  <!--<include file="$(find graspit_interface)/launch/graspit_interface.launch"></include>-->
+</launch>

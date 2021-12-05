@@ -1,0 +1,4 @@
+moveit_msgs/RobotTrajectory trajectory_in
+float64 velocity_scaling
+---
+moveit_msgs/RobotTrajectory trajectory_out

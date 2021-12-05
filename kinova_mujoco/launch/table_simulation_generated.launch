@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+
+<launch>
+  <arg name="object_name" default="out"/>
+  <arg name="object_origin" default="[0.6, 0, 0.2]"/>
+  <arg name="printed_finger" default="false"/>
+  <arg name="convex_decomp" default="false"/>
+  <arg name="look_at_x" default="0.0"/>
+  <arg name="look_at_y" default="0.0"/>
+  <arg name="look_at_z" default="1.2"/>
+  <arg name="prefix" default="" />
+  <arg name="node_start_delay" default="1.0" />
+  <arg name="rviz" default="true"/>
+
+  <param name="object_name" value="$(arg object_name)"/>
+  <param name="object_origin" value="$(arg object_origin)"/>
+  <param name="printed_finger" value="$(arg printed_finger)"/>
+  <param name="convex_decomp" value="$(arg convex_decomp)"/>
+    <!--<node name="xacro2urdf" pkg="kinova_mujoco" type="run_xacro.sh" />
+    <node name="collect_meshes" pkg="kinova_mujoco" type="collect_meshes.py" />
+    -->
+
+    <arg name="robot_description" default="$(find kinova_mujoco)/urdf/kinova_fel_shape_completion_NoDae.urdf"/>
+    <!--<param name="robot_description" command="cat $(find kinova_mujoco)/world_model/kinova_fel_shape_completion_NoDae.urdf"/>-->
+    <!-- Load the URDF, SRDF and other .yaml configuration files on the param server -->
+  <include file="$(find gen3_robotiq_2f_85_move_it_config)/launch/planning_context.launch">
+    <arg name="printed_finger" value="$(arg printed_finger)"/>
+    <!--<arg name="convex_decomp" value="$(arg convex_decomp)"/>-->
+    <arg name="convex_decomp" value="false"/>
+    <arg name="load_robot_description" value="true"/>
+    <arg name="real_setup" value="false"/>
+  </include>
+  <!--<param name="robot_description" textfile="$(find kinova_mujoco)/world_model/kinova_fel_with_objects_NoDae.urdf"/> -->
+
+
+    <!--<arg name="model" default="$(find kinova_mujoco)/world_model/kinova_fel_with_objects.xacro"/> -->
+    <!--><arg name="model" default="$(find iiwa_bhand_description)/robots/obj_test.urdf"/>-->
+
+    <arg name="mujoco_model" default="$(arg robot_description)"/>
+
+    <!--Compensate bias forces in mujoco; If true the effort visible to ROS will not contains gravity/corollios/etc. forces -->
+    <arg name="compensate_bias" default="false"/>
+    <arg name="bias_error" default="1.0"/>
+
+    <!--<param name="robot_description" textfile="$(arg model)"/>-->
+    <group ns="kinova_mujoco">
+        <rosparam command="load" file="$(find kinova_mujoco)/config/joint_position_controllers.yaml"/>
+        <arg name="controllers" default="joint_state_controller gen3_joint_trajectory_controller trajectory_controller_fingers"/>
+        <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen"
+              args="$(arg controllers)"/>
+        <node pkg="topic_tools" type="relay" name="relay_joint_state" args="joint_states /joint_states"/>
+    </group>
+
+    <node name="kinova_mujoco" type="mujoco_control" pkg="mujoco_ros_control" output="screen">
+        <param name="model" value="$(arg mujoco_model)"/>
+        <remap from="/kinova_mujoco/gen3_joint_trajectory_controller/follow_joint_trajectory"
+               to="/PositionJointInterface_trajectory_controller/follow_joint_trajectory"/>
+
+        <remap from="/kinova_mujoco/gen3_joint_trajectory_controller/follow_joint_trajectory"
+               to="/gen3_joint_trajectory_controller/follow_joint_trajectory"/>
+
+
+        <param name="look_at_x" value="$(arg look_at_x)"/>
+        <param name="look_at_y" value="$(arg look_at_y)"/>
+        <param name="look_at_z" value="$(arg look_at_z)"/>
+        <param name="compensate_bias" value="$(arg compensate_bias)"/>
+        <param name="bias_error" value="$(arg bias_error)"/>
+    </node>
+
+
+    <node name="kinova_gripper_action_forwarding" type="gripper_action_to_trajectory_action" pkg="kinova_mujoco"
+          output="screen">
+    </node>
+
+
+    <!--<node pkg="topic_tools" type="relay" name="relay_gripper_action" args="/kinova_mujoco/gripper_controller/gripper_cmd /robotiq_2f_85_gripper_controller/gripper_cmd"/>
+    -->
+    <!-- Given the published joint states, publish tf for the robot links -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen" />
+
+    <!--Load Move Group Interface -->
+    <!-- Load move_group -->
+    <include file="$(find kortex_description)/../kortex_move_it_config/gen3_robotiq_2f_85_move_it_config/launch/move_group.launch">
+        <arg name="dof" value="7"/>
+        <arg name="prefix" value="$(arg prefix)"/>
+        <arg name="publish_monitored_planning_scene" value="true" />
+        <arg name="fake_execution" value="false"/>
+        <arg name="printed_finger" default="$(arg printed_finger)"/>
+        <arg name="real_setup" value="false"/>
+    </include>
+
+
+    <!-- Run Rviz and load the default config to see the state of the move_group node -->
+    <include if="$(arg rviz)" file="$(find kinova_mujoco)/launch/moveit_rviz.launch">
+        <arg name="config" value="true"/>
+        <arg name="debug" value="false"/>
+        <!--<arg name="customconfig" value="-d $(find iiwa_bhand_mujoco)/rviz/rviz_config.rviz"/> -->
+    </include>
+
+    <!-- load initial camera positioning -->
+    <rosparam command="load" file="$(find kinova_mujoco)/config/camera_config.yaml"/>
+
+    <!-- display the scene objects in rviz -->
+    <!--<node name="display_scene_objects" pkg="kinova_mujoco" type="displayObjectMarkers.py" respawn="true" output="screen">
+    </node>-->
+    <node name="camera_tf_broadcaster" pkg="kinova_mujoco" type="camera_tf.py" respawn="true" output="screen"/>
+
+    <node unless="$(arg printed_finger)" name="finger_tf_broadcaster" pkg="kinova_mujoco" type="finger_tf.py" respawn="true" output="screen"/>
+    <node name="parametrize_cartesian_path_server" pkg="shape_completion" type="parametrize_cartesian_path_service" respawn="true" output="screen"/>
+    <node name="smooth_pcl_server" pkg="shape_completion" type="smooth_pcl_service" respawn="true" output="screen"/>
+
+    <include file="$(find point_cloud_segmentation)/launch/segmentation.launch">
+        <arg name="segmentation_algorithm" value="region"/>
+        <arg name="pc_topic" value="/kinova_mujoco/points2"/>
+        <arg name="node_name" value="table_camera_segmentation"/>
+        <arg name="x_cutoff" value="[0.1,1]"/> <!--0.1,1-->
+        <arg name="y_cutoff" value="[-1,1]"/>
+        <arg name="z_cutoff" value="[-1,1]"/>
+        <arg name="x_cutoff_post" value="[0.3, 1]"/>
+        <arg name="y_cutoff_post" value="[-0.3, 0.3]"/>
+        <arg name="z_cutoff_post" value="[0.005, 1.0]"/> <!-- -0.005 -0.0135-->
+    </include>
+</launch>

@@ -1,0 +1,6 @@
+string[] names
+---
+string[] names
+geometry_msgs/PoseStamped[] poses
+string[] mesh_resources
+bool success

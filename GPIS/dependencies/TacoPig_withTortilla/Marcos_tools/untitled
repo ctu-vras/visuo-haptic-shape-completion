@@ -1,0 +1,4 @@
+$ vi sizefiles.sh
+# Bash to write the size of csv files in a directory
+FILEOUT=$1
+

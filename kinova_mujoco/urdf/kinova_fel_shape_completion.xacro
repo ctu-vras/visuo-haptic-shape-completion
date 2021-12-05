@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<robot name="kinova_fel_shape_completion" xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <mujoco>
+        <compiler balanceinertia="true" meshdir="../meshes/" strippath="true"/>
+    </mujoco>
+
+    <xacro:include filename="$(find kinova_mujoco)/urdf/materials.xacro" />
+
+    <link name="world"/>
+
+    <joint name="world_robot_joint" type="fixed">
+     <origin xyz="0 0 0.0" rpy="0 0 0" />
+     <parent link="world"/>
+     <child link="base_link"/>
+    </joint>
+
+
+    <xacro:arg name="printed_finger" default="false" />
+    <xacro:arg name="convex_decomp" default="false" />
+    <xacro:arg name="real_setup" default="true" />
+
+    <xacro:include filename="$(find kortex_description)/robots/gen3_robotiq_2f_85.xacro"/>
+
+
+</robot>

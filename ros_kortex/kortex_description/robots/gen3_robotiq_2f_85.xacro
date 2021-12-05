@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<robot name="gen3_robotiq_2f_85" xmlns:xacro="http://ros.org/wiki/xacro">
+    
+    <!-- Arguments -->
+    <xacro:arg name="arm" default="gen3" />
+    <xacro:arg name="dof" default="7" />
+    <xacro:arg name="vision" default="true" />
+
+    <xacro:arg name="gripper" default="robotiq_2f_85" />
+
+    <xacro:arg name="sim" default="false" />
+    <xacro:arg name="real_setup" default="true"/>
+    <xacro:arg name="prefix" default="" />
+    <xacro:arg name="printed_finger" default="false" />
+
+    <xacro:include filename="$(find kortex_description)/robots/kortex_robot.xacro" />
+    <xacro:load_robot arm="$(arg arm)" gripper="$(arg gripper)" dof="$(arg dof)" vision="$(arg vision)" sim="$(arg sim)" prefix="$(arg prefix)" />
+
+    <xacro:include filename="$(find kinova_mujoco)/urdf/materials.xacro"/>
+
+    <xacro:if value="$(arg real_setup)">
+        <xacro:include filename="$(find kinova_mujoco)/urdf/table_without_cameras.urdf"/>
+    </xacro:if>
+    <xacro:if value="$(arg printed_finger)">
+        <xacro:include filename="$(find shape_completion)/urdf/finger.urdf"/>
+    </xacro:if>
+
+    <xacro:unless value="$(arg real_setup)">
+        <xacro:include filename="$(find kinova_mujoco)/urdf/table.urdf"/>
+        <xacro:arg name="convex_decomp" default="false" />
+
+        <xacro:if value="$(arg convex_decomp)">
+            <xacro:include filename="$(find kinova_mujoco)/urdf/shape_completion_scene.urdf"/>
+        </xacro:if>
+
+        <xacro:unless value="$(arg convex_decomp)">
+            <xacro:include filename="$(find kinova_mujoco)/urdf/object.urdf"/>
+        </xacro:unless>
+
+
+    </xacro:unless>
+</robot>

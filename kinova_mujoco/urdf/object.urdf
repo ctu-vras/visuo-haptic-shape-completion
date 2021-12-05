@@ -1,0 +1,78 @@
+<robot>
+
+  <link name="object_visual">
+
+    <visual>
+
+      <origin xyz="0 0 0"/>
+
+      <geometry>
+
+        <mesh filename="package://kinova_mujoco/meshes/object.stl"/>
+      </geometry>
+
+      <material name="Blue"/>
+
+    </visual>
+
+  </link>
+
+  <link name="object">
+
+    <inertial>
+
+      <origin xyz="-0.0019383660567736357 0.0027726526156499677 -0.011249491202823227"/>
+
+      <mass value="500"/>
+
+      <inertia ixx="8.3800856662089e-06" ixy="-7.672117730799384e-08" ixz="8.974551172551435e-08" iyy="6.8662862688009336e-06" iyz="-3.0634418277390505e-07" izz="3.7323984521120366e-06"/>
+
+    </inertial>
+
+    <visual>
+
+      <origin xyz="0 0 0"/>
+
+      <geometry>
+
+        <mesh filename="package://kinova_mujoco/meshes/object.stl"/>
+      </geometry>
+
+      <material name="Blue"/>
+
+    </visual>
+
+    <collision>
+
+      <origin xyz="0 0 0"/>
+
+      <geometry>
+
+        <mesh filename="package://kinova_mujoco/meshes/object.stl"/>
+      </geometry>
+
+      <material name="Blue"/>
+
+    </collision>
+
+    <contact/>
+
+  </link>
+
+  <joint name="object_joint" type="fixed">
+
+    <parent link="object_visual"/>
+
+    <child link="object"/>
+
+  </joint>
+
+  <joint name="joint_world_object" type="fixed">
+
+    <parent link="base_link"/>
+
+    <child link="object_visual"/>
+
+     <origin rpy="0.0 0.0 0.0" xyz="0.6 0 0.15"/>
+  </joint>
+</robot>

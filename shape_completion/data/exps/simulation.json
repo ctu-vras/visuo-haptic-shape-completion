@@ -1,0 +1,7 @@
+{
+"objects": ["watermelon_poisson_000", "dumpbell_poisson_000", "jar_poisson_000", "014_lemon", "057_racquetball", "050_medium_clamp", "065-h_cups", "orange_poisson_000", "003_cracker_box", "shampoo_new_poisson_000", "banana_poisson_000", "drill_box", "021_bleach_cleanser", "019_pitcher_base", "001_chip_can", "035_power_drill", "053_mini_soccer_ball", "021_bleach_cleanser_90_y", "021_bleach_cleanser_180_y", "021_bleach_cleanser_270_y", "019_pitcher_base_180_y", "035_power_drill_180_y", "light_bulb_poisson_006", "flashlight_poisson_014", "flashlight_poisson_014_180_y", "flashlight_poisson_014_90_x", "flashlight_poisson_014_180_x", "flashlight_poisson_014_270_x", "donut_real_180_x", "avocado_real_180_x", "drill_box_180_y", "drill_box_180_x", "005_tomato_soup_can", "036_wood_block", "004_sugar_box"],
+"repetitions": [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+"reconstructions": [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
+"touches": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+}
+

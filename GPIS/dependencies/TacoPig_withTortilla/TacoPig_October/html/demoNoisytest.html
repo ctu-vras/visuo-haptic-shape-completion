@@ -1,0 +1,186 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Gaussian Process Input Noise Demo</title><meta name="generator" content="MATLAB 7.14"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2012-08-21"><meta name="DC.source" content="demoNoisytest.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, tt, code { font-size:12px; }
+pre { margin:0px 0px 20px; }
+pre.error { color:red; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+
+  </style></head><body><div class="content"><h1>Gaussian Process Input Noise Demo</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Add paths</a></li><li><a href="#2">Set up the input data</a></li><li><a href="#3">Configure the standard GP model</a></li><li><a href="#4">Mean Functions:</a></li><li><a href="#5">Covariance Functions:</a></li><li><a href="#6">Noise Functions:</a></li><li><a href="#7">Optimisation Parameters</a></li><li><a href="#8">Seed initial hyperparameters with auto-sized vectors</a></li><li><a href="#9">Solve the models</a></li></ul></div><h2>Add paths<a name="1"></a></h2><pre class="codeinput">close <span class="string">all</span>;
+clear <span class="string">all</span>; clear <span class="string">functions</span>; clc;
+<span class="comment">% Add working path</span>
+p = pwd;
+root = strfind(p, <span class="string">'geotherML'</span>)+9;
+slash = p(root);     root = p(1:root);
+Libroot = [root, <span class="string">'lib'</span>, slash];
+addpath(genpath(Libroot))
+</pre><h2>Set up the input data<a name="2"></a></h2><p>X = [-2.1775;-0.9235;0.7502;-5.8868;-2.7995;4.2504;2.4582;6.1426;...     -4.0911;-6.3481;1.0004;-4.7591;0.4715;4.8933;4.3248;-3.7461;...     -7.3005;5.8177;2.3851;-6.3772]'; y = [1.4121;1.6936;-0.7444;0.2493;0.3978;-1.2755;-2.221;-0.8452;...     -1.2232;0.0105;-1.0258;-0.8207;-0.1462;-1.5637;-1.098;-1.1721;...     -1.7554;-1.0712;-2.6937;-0.0329]';</p><pre class="codeinput">X = [0.5470    0.9846    1.9866    3.5298    4.0250    4.9923    5.9597];
+y = [1.0012    0.9672    1.0864    2.3978    3.8285    3.8114    4.0839];
+
+[d n] = size(X);
+[X id] = sort(X);
+y = y(id);
+
+xstar = linspace(min(X)-1, max(X)+1, 201); <span class="comment">% and query on a grid</span>
+X_var = 0*ones(d,n);
+X_var(4) = 3; <span class="comment">% Add variance to location of 4th point</span>
+</pre><h2>Configure the standard GP model<a name="3"></a></h2><pre class="codeinput">GP = GP_STD();
+GP.X = X;
+GP.y = y;
+GP.factorisation = <span class="string">'SVD'</span>; <span class="comment">% 'SVD' or 'CHOL' or 'JITCHOL'</span>
+</pre><h2>Mean Functions:<a name="4"></a></h2><pre class="codeinput">    GP.MeanFn =GP_ConstantMean(mean(y));
+</pre><h2>Covariance Functions:<a name="5"></a></h2><pre class="codeinput">    GP.CovFn = GP_SqExpNoisyCov(X_var);
+<span class="comment">%     GP.CovFn = GP_SqExpCov();</span>
+</pre><h2>Noise Functions:<a name="6"></a></h2><pre class="codeinput">    GP.NoiseFn = GP_StatNoise();
+</pre><h2>Optimisation Parameters<a name="7"></a></h2><p>Choose optimiser % defaults to fminunc</p><pre class="codeinput">    GP.solver_function = @fminunc;
+<span class="comment">%     GP.objective_function = @GP_LMLG_FN;</span>
+    GP.objective_function = @GP_CRSVAL_FN; <span class="comment">% cross validation</span>
+    GP.optimset(<span class="string">'gradobj'</span>, <span class="string">'on'</span>);
+</pre><h2>Seed initial hyperparameters with auto-sized vectors<a name="8"></a></h2><pre class="codeinput">GP.covpar  = 2.2*ones(1,GP.CovFn.npar(size(X,1)));
+GP.meanpar = zeros(1,GP.MeanFn.npar(size(X,1)));
+GP.noisepar = 0.25*ones(1,GP.NoiseFn.npar);
+</pre><h2>Solve the models<a name="9"></a></h2><pre class="codeinput">GP.solve();
+[mf, vf] = GP.query(xstar);
+sf  = sqrt(vf);
+
+<span class="comment">% Display posterior</span>
+figure
+plot(X, y, <span class="string">'k+'</span>, <span class="string">'MarkerSize'</span>, 17)
+f  = [mf+2*sf,flipdim(mf-2*sf,2)]';
+h(1) = fill([xstar, flipdim(xstar,2)], f, [6 6 6]/8, <span class="string">'EdgeColor'</span>, [6 6 6]/8);
+hold <span class="string">on</span>
+h(2) = plot(xstar,mf,<span class="string">'k-'</span>,<span class="string">'LineWidth'</span>,2);
+h(3) = plot(X, y, <span class="string">'k+'</span>, <span class="string">'MarkerSize'</span>, 17);
+title(<span class="string">'Not learnt'</span>);
+legend(h,<span class="string">'Predictive Standard Deviation'</span>,<span class="string">'Predictive Mean'</span>, <span class="string">'Training Points'</span>)
+</pre><pre class="codeoutput">
+</pre><img vspace="5" hspace="5" src="demoNoisytest_01.png" alt=""> <p class="footer"><br>
+      Published with MATLAB&reg; 7.14<br></p></div><!--
+##### SOURCE BEGIN #####
+%% Gaussian Process Input Noise Demo
+%% Add paths 
+close all; 
+clear all; clear functions; clc;
+% Add working path
+p = pwd;
+root = strfind(p, 'geotherML')+9;
+slash = p(root);     root = p(1:root);
+Libroot = [root, 'lib', slash];
+addpath(genpath(Libroot))
+
+%% Set up the input data
+% X = [-2.1775;-0.9235;0.7502;-5.8868;-2.7995;4.2504;2.4582;6.1426;...
+%     -4.0911;-6.3481;1.0004;-4.7591;0.4715;4.8933;4.3248;-3.7461;...
+%     -7.3005;5.8177;2.3851;-6.3772]';
+% y = [1.4121;1.6936;-0.7444;0.2493;0.3978;-1.2755;-2.221;-0.8452;...
+%     -1.2232;0.0105;-1.0258;-0.8207;-0.1462;-1.5637;-1.098;-1.1721;...
+%     -1.7554;-1.0712;-2.6937;-0.0329]';
+X = [0.5470    0.9846    1.9866    3.5298    4.0250    4.9923    5.9597];
+y = [1.0012    0.9672    1.0864    2.3978    3.8285    3.8114    4.0839];
+
+[d n] = size(X);
+[X id] = sort(X);
+y = y(id);
+
+xstar = linspace(min(X)-1, max(X)+1, 201); % and query on a grid
+X_var = 0*ones(d,n);
+X_var(4) = 3; % Add variance to location of 4th point
+%% Configure the standard GP model
+GP = GP_STD(); 
+GP.X = X;
+GP.y = y;
+GP.factorisation = 'SVD'; % 'SVD' or 'CHOL' or 'JITCHOL'
+
+%% Mean Functions:
+    GP.MeanFn =GP_ConstantMean(mean(y));
+
+%% Covariance Functions:
+    GP.CovFn = GP_SqExpNoisyCov(X_var);
+%     GP.CovFn = GP_SqExpCov();
+
+    
+%% Noise Functions:
+    GP.NoiseFn = GP_StatNoise();
+
+
+%% Optimisation Parameters
+% Choose optimiser % defaults to fminunc
+    GP.solver_function = @fminunc; 
+%     GP.objective_function = @GP_LMLG_FN;
+    GP.objective_function = @GP_CRSVAL_FN; % cross validation
+    GP.optimset('gradobj', 'on');
+
+
+%% Seed initial hyperparameters with auto-sized vectors
+GP.covpar  = 2.2*ones(1,GP.CovFn.npar(size(X,1)));
+GP.meanpar = zeros(1,GP.MeanFn.npar(size(X,1)));
+GP.noisepar = 0.25*ones(1,GP.NoiseFn.npar);
+
+
+%% Solve the models
+GP.solve(); 
+[mf, vf] = GP.query(xstar);
+sf  = sqrt(vf);
+
+% Display posterior
+figure
+plot(X, y, 'k+', 'MarkerSize', 17)
+f  = [mf+2*sf,flipdim(mf-2*sf,2)]';
+h(1) = fill([xstar, flipdim(xstar,2)], f, [6 6 6]/8, 'EdgeColor', [6 6 6]/8);
+hold on
+h(2) = plot(xstar,mf,'k-','LineWidth',2);
+h(3) = plot(X, y, 'k+', 'MarkerSize', 17);
+title('Not learnt');
+legend(h,'Predictive Standard Deviation','Predictive Mean', 'Training Points')
+
+##### SOURCE END #####
+--></body></html>

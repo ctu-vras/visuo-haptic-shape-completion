@@ -1,0 +1,198 @@
+Determining if the CL_VERSION_2_2 exist failed with the following output:
+Change Dir: /home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_e572b/fast"
+/usr/bin/make -f CMakeFiles/cmTC_e572b.dir/build.make CMakeFiles/cmTC_e572b.dir/build
+make[1]: Entering directory '/home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_e572b.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_e572b.dir/CheckSymbolExists.c.o   -c /home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:2:10: fatal error: OpenCL_INCLUDE_DIR-NOTFOUND/CL/cl.h: No such file or directory
+ #include <OpenCL_INCLUDE_DIR-NOTFOUND/CL/cl.h>
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+CMakeFiles/cmTC_e572b.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_e572b.dir/CheckSymbolExists.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_e572b.dir/CheckSymbolExists.c.o] Error 1
+make[1]: Leaving directory '/home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_e572b/fast' failed
+make: *** [cmTC_e572b/fast] Error 2
+
+File /home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <OpenCL_INCLUDE_DIR-NOTFOUND/CL/cl.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef CL_VERSION_2_2
+  return ((int*)(&CL_VERSION_2_2))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the CL_VERSION_2_1 exist failed with the following output:
+Change Dir: /home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_5763b/fast"
+/usr/bin/make -f CMakeFiles/cmTC_5763b.dir/build.make CMakeFiles/cmTC_5763b.dir/build
+make[1]: Entering directory '/home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_5763b.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_5763b.dir/CheckSymbolExists.c.o   -c /home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:2:10: fatal error: OpenCL_INCLUDE_DIR-NOTFOUND/CL/cl.h: No such file or directory
+ #include <OpenCL_INCLUDE_DIR-NOTFOUND/CL/cl.h>
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+CMakeFiles/cmTC_5763b.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_5763b.dir/CheckSymbolExists.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_5763b.dir/CheckSymbolExists.c.o] Error 1
+make[1]: Leaving directory '/home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_5763b/fast' failed
+make: *** [cmTC_5763b/fast] Error 2
+
+File /home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <OpenCL_INCLUDE_DIR-NOTFOUND/CL/cl.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef CL_VERSION_2_1
+  return ((int*)(&CL_VERSION_2_1))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the CL_VERSION_2_0 exist failed with the following output:
+Change Dir: /home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_ed7da/fast"
+/usr/bin/make -f CMakeFiles/cmTC_ed7da.dir/build.make CMakeFiles/cmTC_ed7da.dir/build
+make[1]: Entering directory '/home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_ed7da.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_ed7da.dir/CheckSymbolExists.c.o   -c /home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:2:10: fatal error: OpenCL_INCLUDE_DIR-NOTFOUND/CL/cl.h: No such file or directory
+ #include <OpenCL_INCLUDE_DIR-NOTFOUND/CL/cl.h>
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+CMakeFiles/cmTC_ed7da.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_ed7da.dir/CheckSymbolExists.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_ed7da.dir/CheckSymbolExists.c.o] Error 1
+make[1]: Leaving directory '/home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_ed7da/fast' failed
+make: *** [cmTC_ed7da/fast] Error 2
+
+File /home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <OpenCL_INCLUDE_DIR-NOTFOUND/CL/cl.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef CL_VERSION_2_0
+  return ((int*)(&CL_VERSION_2_0))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the CL_VERSION_1_2 exist failed with the following output:
+Change Dir: /home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_d7d0b/fast"
+/usr/bin/make -f CMakeFiles/cmTC_d7d0b.dir/build.make CMakeFiles/cmTC_d7d0b.dir/build
+make[1]: Entering directory '/home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_d7d0b.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_d7d0b.dir/CheckSymbolExists.c.o   -c /home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:2:10: fatal error: OpenCL_INCLUDE_DIR-NOTFOUND/CL/cl.h: No such file or directory
+ #include <OpenCL_INCLUDE_DIR-NOTFOUND/CL/cl.h>
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+CMakeFiles/cmTC_d7d0b.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_d7d0b.dir/CheckSymbolExists.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_d7d0b.dir/CheckSymbolExists.c.o] Error 1
+make[1]: Leaving directory '/home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_d7d0b/fast' failed
+make: *** [cmTC_d7d0b/fast] Error 2
+
+File /home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <OpenCL_INCLUDE_DIR-NOTFOUND/CL/cl.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef CL_VERSION_1_2
+  return ((int*)(&CL_VERSION_1_2))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the CL_VERSION_1_1 exist failed with the following output:
+Change Dir: /home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_65d4c/fast"
+/usr/bin/make -f CMakeFiles/cmTC_65d4c.dir/build.make CMakeFiles/cmTC_65d4c.dir/build
+make[1]: Entering directory '/home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_65d4c.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_65d4c.dir/CheckSymbolExists.c.o   -c /home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:2:10: fatal error: OpenCL_INCLUDE_DIR-NOTFOUND/CL/cl.h: No such file or directory
+ #include <OpenCL_INCLUDE_DIR-NOTFOUND/CL/cl.h>
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+CMakeFiles/cmTC_65d4c.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_65d4c.dir/CheckSymbolExists.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_65d4c.dir/CheckSymbolExists.c.o] Error 1
+make[1]: Leaving directory '/home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_65d4c/fast' failed
+make: *** [cmTC_65d4c/fast] Error 2
+
+File /home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <OpenCL_INCLUDE_DIR-NOTFOUND/CL/cl.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef CL_VERSION_1_1
+  return ((int*)(&CL_VERSION_1_1))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the CL_VERSION_1_0 exist failed with the following output:
+Change Dir: /home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_1d24f/fast"
+/usr/bin/make -f CMakeFiles/cmTC_1d24f.dir/build.make CMakeFiles/cmTC_1d24f.dir/build
+make[1]: Entering directory '/home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_1d24f.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_1d24f.dir/CheckSymbolExists.c.o   -c /home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:2:10: fatal error: OpenCL_INCLUDE_DIR-NOTFOUND/CL/cl.h: No such file or directory
+ #include <OpenCL_INCLUDE_DIR-NOTFOUND/CL/cl.h>
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+CMakeFiles/cmTC_1d24f.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_1d24f.dir/CheckSymbolExists.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_1d24f.dir/CheckSymbolExists.c.o] Error 1
+make[1]: Leaving directory '/home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_1d24f/fast' failed
+make: *** [cmTC_1d24f/fast] Error 2
+
+File /home/robot3/shape_completion_ws/src/v-hacd/build/linux2/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <OpenCL_INCLUDE_DIR-NOTFOUND/CL/cl.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef CL_VERSION_1_0
+  return ((int*)(&CL_VERSION_1_0))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+

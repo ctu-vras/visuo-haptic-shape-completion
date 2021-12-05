@@ -1,0 +1,1 @@
+/usr/bin/c++   -fopenmp -g -Wall    -rdynamic CMakeFiles/testVHACD.dir/src/main.cpp.o CMakeFiles/testVHACD.dir/src/oclHelper.cpp.o  -o testVHACD ../VHACD_Lib/libvhacd.a -lrt 

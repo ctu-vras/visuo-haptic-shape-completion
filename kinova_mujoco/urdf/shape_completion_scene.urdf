@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<robot  name="UNNAMED_0" >
+ <link  name="003_cracker_box_visual" >
+  <visual >
+   <origin  xyz="0 0 0" />
+   <geometry >
+    <mesh  filename="package://kinova_mujoco/meshes/003_cracker_box_visual.stl" />
+   </geometry>
+   <material  name="Grey" />
+  </visual>
+ </link>
+ <link  name="003_cracker_box_000000" >
+  <inertial >
+   <origin  xyz="-0.02402132946267451 0.009821733548002533 0.11912762008621094" />
+   <mass  value="2.574341123449223" />
+   <inertia  ixz="2.2590149741280792e-07"  ixx="1.681273983461399e-05"  ixy="5.031838023462785e-08"  izz="6.537191195823577e-06"  iyy="1.221356527283585e-05"  iyz="-2.6300293034227934e-08" />
+  </inertial>
+  <visual >
+   <origin  xyz="0 0 0" />
+   <geometry >
+    <mesh  filename="package://kinova_mujoco/meshes/003_cracker_box_000000.stl" />
+   </geometry>
+   <material  name="Blue" />
+  </visual>
+  <collision >
+   <origin  xyz="0 0 0" />
+   <geometry >
+    <mesh  filename="package://kinova_mujoco/meshes/003_cracker_box_000000.stl" />
+   </geometry>
+   <material  name="Blue" />
+  </collision>
+  <contact />
+ </link>
+ <joint  type="fixed"  name="003_cracker_box_joint_0000" >
+  <parent  link="003_cracker_box_visual" />
+  <child  link="003_cracker_box_000000" />
+ </joint>
+ <joint  type="fixed"  name="joint_world_003_cracker_box" >
+  <parent  link="base_link" />
+  <child  link="003_cracker_box_visual" />
+  <origin  xyz="0.6 0 0.15" />
+ </joint>
+</robot>

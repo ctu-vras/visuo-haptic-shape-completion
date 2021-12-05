@@ -1,0 +1,24 @@
+Act-VH
+Copyright (C) 2021  Lukas Rustler
+Department of Cybernetics, Faculty of Electrical Engineering, 
+Czech Technical University in Prague
+All rights reserved.
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details. A copy of the GNU General 
+Public License is included with this distribution in the file GPL.txt
+
+Several other software packages and source files have been included in 
+this distribution and are subject to their own license specifications.  
+Please see Fast-Bobust-ICP/*, GPIS/*, IGR/*, kinova_mujoco/*, mujoco-ros/*, odio_urdf/*,
+point_cloud_segmentation/*, ros_kortex/*, ros_kortex_vision/*,
+supervoxel_clustering/*, v-hacd/* for information on those packages.
+
+MuJoCo is a trademark of DeepMind (https://mujoco.org).

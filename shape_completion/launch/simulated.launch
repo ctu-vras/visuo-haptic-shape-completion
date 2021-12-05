@@ -1,0 +1,59 @@
+<launch>
+
+    <arg name="object_name" default="avocado"/>
+    <arg name="object_origin" default="[0.6, 0, 0.2]"/>
+    <arg name="printed_finger" default="false"/>
+    <arg name="convex_decomp" default="false"/>
+    <arg name="rviz" default="true"/>
+
+    <param name="use_sim_time" value="false"/>
+    <group unless="$(arg printed_finger)">
+        <param name="left_inner_finger_joint_init" value="-0.778" />
+        <param name="right_inner_knuckle_joint_init" value="0.83" />
+        <param name="finger_joint_init" value="0.83" />
+        <param name="right_inner_finger_joint_init" value="-0.787" />
+        <param name="left_inner_knuckle_joint_init" value=" 0.815" />
+        <param name="right_outer_knuckle_joint_init" value="0.827" />
+    </group>
+    <group if="$(arg printed_finger)">
+        <param name="left_inner_finger_joint_init" value="0.0" />
+        <param name="right_inner_knuckle_joint_init" value="0.0" />
+        <param name="finger_joint_init" value="0.0" />
+        <param name="right_inner_finger_joint_init" value="0.0" />
+        <param name="left_inner_knuckle_joint_init" value="0.0" />
+        <param name="right_outer_knuckle_joint_init" value="0.0" />
+    </group>
+
+
+    <param name="joint_1_init" value="1.383"/>
+    <param name="joint_2_init" value="-0.074"/>
+    <param name="joint_3_init" value="-0.074"/>
+    <param name="joint_4_init" value="0.165"/>
+    <param name="joint_5_init" value="-0.314"/>
+    <param name="joint_6_init" value="-0.102"/>
+    <param name="joint_7_init" value="0.849"/>
+
+    <!--<param name="joint_1_init" value="1.472"/>
+    <param name="joint_2_init" value="-0.8499"/>
+    <param name="joint_3_init" value="0.0286"/>
+    <param name="joint_4_init" value="-0.624"/>
+    <param name="joint_5_init" value="-3.136"/>
+    <param name="joint_6_init" value="-1.472"/>
+    <param name="joint_7_init" value="3.492"/>-->
+
+    <param name="compensate_bias" value="true"/>
+    <param name="show_full_torques" value="false"/>
+
+    <include file="$(find kinova_mujoco)/launch/table_simulation_generated.launch">
+        <arg name="object_name" value="$(arg object_name)"/>
+        <arg name="object_origin" value="$(arg object_origin)"/>
+        <arg name="printed_finger" value="$(arg printed_finger)"/>
+        <arg name="convex_decomp" value="$(arg convex_decomp)"/>
+        <arg name="rviz" value="$(arg rviz)"/>
+    </include>
+
+    <node name="reconstruction_shower" pkg="shape_completion" type="rec_mesh_publisher.py" respawn="true" output="screen"/>
+    <node name="arrow_shower" pkg="shape_completion" type="arrows.py" respawn="true" output="screen"/>
+    <node name="new_pc_node" pkg="shape_completion" type="new_pc_vis.py" respawn="true" output="screen"/>
+
+</launch>
