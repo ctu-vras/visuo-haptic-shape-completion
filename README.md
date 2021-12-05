@@ -6,7 +6,7 @@ This repository includes code for _Active Visuo-Haptic Object Shape Completion_.
 
 <p align="middle">
  <img src="figs/diagram_narrow.jpg" width=75%>
-<\p>
+</p>
 
 # Contents  
 - [Licensing](#licensing)
@@ -238,7 +238,8 @@ This repository does not include drivers for our robot, gripper and camera. But 
 - Run `rosrun shape_completion main.py`, with the same arguments as for the simulation  
 
 ## Acknowledgements
-<p align="middle">
 This work was supported by the project Interactive Perception-Action-Learning for Modelling Objects (IPALM, https://sites.google.com/view/ipalm) (H2020 -  FET - ERA-NET Cofund - CHIST-ERA III / Technology Agency of the Czech Republic, EPSILON, no. TH05020001).  
 
-<img src="figs/tacr.png" width=10%></p>  
+<p align="middle">
+ <img src="figs/tacr.png" width=10%>
+</p>  
