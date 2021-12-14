@@ -243,3 +243,5 @@ This work was supported by the project Interactive Perception-Action-Learning fo
 <p align="middle">
  <img src="figs/tacr.png" width=10%>
 </p>  
+
+We also thank Jan Behrens for contributions to the simulation environment through the following repositories: [MuJoCo-ROS](https://github.com/JKBehrens/mujoco-ros) and [Kinova_Mujoco](https://github.com/JKBehrens/kinova_mujoco).
