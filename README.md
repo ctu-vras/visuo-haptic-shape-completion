@@ -8,6 +8,10 @@ This repository includes code for _Active Visuo-Haptic Object Shape Completion_.
  <img src="figs/diagram_narrow.jpg" width=75%>
 </p>
 
+
+**Check out youtube video as well**
+[<img src="figs/yt_thumb.png" width=75%>](https://youtu.be/Ft1PUYRNFHw)
+
 # Contents  
 - [Licensing](#licensing)
 - [Installation](#installation) 
@@ -77,7 +81,7 @@ The are two possible (recommended) ways to link data from your computer:
 Tips and Tricks
 - You can work entirely in the container over VNC---it contains a desktop environment with an internet browser, file manager etc. However, we usually use the container just as a screen and do everything in terminals on the host computer
   - you can open another terminal in the container with `docker exex -it <container_name>`
-- Unfortunately, you can not copy-past from the host computer to the container.
+- Unfortunately, you can not copy-paste from the host computer to the container.
 - If you have only one screen and do not want to work inside the container, you can open it on a mobile phone just by connecting to the VNC in your phone's internet browser
 - You can delete the container with `docker container rm <container_name>`
   - or delete all Docker resources with `docker system prune -a`
@@ -244,4 +248,5 @@ This work was supported by the project Interactive Perception-Action-Learning fo
  <img src="figs/tacr.png" width=10%>
 </p>  
 
-We also thank Jan Behrens for contributions to the simulation environment through the following repositories: [MuJoCo-ROS](https://github.com/JKBehrens/mujoco-ros) and [Kinova_Mujoco](https://github.com/JKBehrens/kinova_mujoco).
+We also thank Jan Behrens for contributions to the simulation environment through the following repositories: [MuJoCo-ROS](https://github.com/JKBehrens/mujoco-ros) and [Kinova_Mujoco](https://github.com/JKBehrens/kinova_mujoco).  
+Last but not least, we thank [Robotology community](https://github.com/robotology) for help the with Docker image.
