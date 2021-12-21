@@ -1,7 +1,7 @@
 # Active Visuo-Haptic Object Shape Completion
 
 This repository includes code for _Active Visuo-Haptic Object Shape Completion_.  
-**Authors**: Lukas Rustler, Jens Lundell, Ville Kyrki and Matej Hoffmann  
+**Authors**: Lukas Rustler, Jens Lundell, Jan Behrens, Ville Kyrki and Matej Hoffmann  
 **Maintainer**: Lukas Rustler, rustlluk@fel.cvut.cz  
 
 <p align="middle">
