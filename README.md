@@ -1,6 +1,7 @@
 # Active Visuo-Haptic Object Shape Completion
 
-This repository includes code for _Active Visuo-Haptic Object Shape Completion_.  
+This repository includes code for _Active Visuo-Haptic Object Shape Completion_.
+It provides a **simulation environment**, a **dataset** (including **data from the real robot**), and can serve as a **benchmark / baseline** if you want to compare with performance we achieved. 
 **Authors**: Lukas Rustler, Jens Lundell, Jan Behrens, Ville Kyrki and Matej Hoffmann  
 **Maintainer**: Lukas Rustler, rustlluk@fel.cvut.cz  
 
