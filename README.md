@@ -24,6 +24,7 @@ It provides a **simulation environment**, a **dataset** (including **data from t
 - [Evaluation](#evaluation)  
 - [Baselines](#baselines)  
 - [Real setup](#real-setup)  
+- [Publication / citing](#publication)
 - [Acknowledgements](#acknowledgements)
 
 ## Licensing
@@ -231,7 +232,6 @@ Then the pipeline can be run with `rosrun shape_completion do_experiments.py -s 
     - each key contains another dictionary, where keys are names of the objects. Values are other dictionaries with keys named after experiments, e.g., "5,1,3" is experiment with five touches, 1 reconstruction between touches and 3 repetitions. Each key contains python array of size Rx(T+1), where R is number of repetitions and T is number of touches.
       - For example, values of Jaccard similarity for drill box with "5,1,3" experiment can accessed like this: `d['jaccard_all'][()]["drill_box"]["5,1,3"]`
 
-
 ## Baselines
 Baseline reconstruction methods can be used from [baselines.py](shape_completion/src/shape_completion/baselines.py).  One can run `rosrun shape_completion baselines.py reconstruct_from_logs log_name.log` to reconstruct with all the methods.
 
@@ -241,6 +241,13 @@ This repository does not include drivers for our robot, gripper and camera. But 
 - Run `roslaunch shape_completion real.launch`, with the same arguments as for the simulation (withou `convex_decomp`)  
   - check if everything runs fine -- the cameras sometimes do not initialize properly and restart of the launch is needed 
 - Run `rosrun shape_completion main.py`, with the same arguments as for the simulation  
+
+## Publication / citing this work
+This repository is connected to the following publication:
+
+Rustler, L., Lundell, J., Behrens, J. K., Kyrki, V., & Hoffmann, M. (2022). 'Active Visuo-Haptic Object Shape Completion'. IEEE Robotics and Automation Letters 7 (2), 5254-5261. [[DOI IEEE Xplore]](https://doi.org/10.1109/LRA.2022.3152975)[[arxiv]](https://arxiv.org/abs/2203.09149)[[youtube-video]](https://youtu.be/iZF4ph4zMEA)
+
+If you use the code or data in this repository, please cite this article.
 
 ## Acknowledgements
 This work was supported by the project Interactive Perception-Action-Learning for Modelling Objects (IPALM, https://sites.google.com/view/ipalm) (H2020 -  FET - ERA-NET Cofund - CHIST-ERA III / Technology Agency of the Czech Republic, EPSILON, no. TH05020001).  
