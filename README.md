@@ -10,7 +10,7 @@ It provides a **simulation environment**, a **dataset** (including **data from t
 </p>
 
 
-**Check out youtube video as well**
+**Check out youtube video as well**  
 [<img src="figs/yt_thumb.png" width=75%>](https://youtu.be/Ft1PUYRNFHw)
 
 # Contents  
