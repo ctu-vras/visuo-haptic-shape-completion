@@ -242,7 +242,7 @@ This repository does not include drivers for our robot, gripper and camera. But 
   - check if everything runs fine -- the cameras sometimes do not initialize properly and restart of the launch is needed 
 - Run `rosrun shape_completion main.py`, with the same arguments as for the simulation  
 
-## Publication / citing this work
+## Publication
 This repository is connected to the following publication:
 
 Rustler, L., Lundell, J., Behrens, J. K., Kyrki, V., & Hoffmann, M. (2022). 'Active Visuo-Haptic Object Shape Completion'. IEEE Robotics and Automation Letters 7 (2), 5254-5261. [[DOI IEEE Xplore]](https://doi.org/10.1109/LRA.2022.3152975)[[arxiv]](https://arxiv.org/abs/2203.09149)[[youtube-video]](https://youtu.be/iZF4ph4zMEA)
